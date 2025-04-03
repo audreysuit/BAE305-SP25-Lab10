@@ -1,6 +1,6 @@
 # BAE305-SP25-Lab10
 # Laboratory Report for Lab 10 of BAE305 Spring 2025
-# Lab 10 - The Brain: Microcontrollers 
+# Lab 10 - Python and AI
 * By: Abby Phillips and Audrey Suit
 * Submitted: April 23, 2025
 
