@@ -41,6 +41,29 @@
 | **Model**  | GPT-4 (ChatGPT-4, April 2025 version) |
 | **Prompt** | Show Python code to generate the above map |
 
+# Please generate a Python function that accesses the database, filters for the names of water quality measurement sites, and displays the location information for all sites without repetition.
+
+import pandas as pd
+
+def get_unique_water_quality_sites(data):
+    # Filter for rows where the MonitoringLocationTypeName contains water quality-related sites (e.g., stream, river, etc.)
+    water_quality_sites = data[data['MonitoringLocationTypeName'].str.contains('Stream|River', na=False)]
+
+    # Select only the relevant columns to display location information
+    location_info = water_quality_sites[['MonitoringLocationName', 'MonitoringLocationIdentifier', 
+                                         'MonitoringLocationTypeName', 'MonitoringLocationDescriptionText']]
+    
+    # Drop duplicate rows to ensure no repetition
+    unique_location_info = location_info.drop_duplicates()
+
+    # Display the filtered and unique location information
+    import ace_tools as tools; tools.display_dataframe_to_user(name="Unique Water Quality Sites", dataframe=unique_location_info)
+
+    return unique_location_info
+
+# Call the function to display the results
+unique_sites = get_unique_water_quality_sites(data)
+
 
 # Discussion
 
