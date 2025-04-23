@@ -103,93 +103,115 @@ m.save("station_map.html")
 ### Can you please generate with turbidity?
 ![image](https://github.com/user-attachments/assets/b4ccb42a-c5b9-4ffb-9bdd-26cc67d9e24f)
 ### Can you please show me the full python code you used to generate these graphs?
+# water_quality_plots.py
+"""
+Tools for filtering Water Quality Portal / USGS data
+and plotting time–series of one or more characteristics.
 
-```python
+Example
+-------
+>>> import pandas as pd
+>>> from water_quality_plots import plot_multi
+>>> df = pd.read_csv("kentucky_river.csv")
+>>> plot_multi(df, ["pH", "Dissolved oxygen"])
+"""
+from __future__ import annotations
 
-import pandas as pd
+from collections.abc import Iterable
+from pathlib import Path
+from typing import List, Tuple
+
 import matplotlib.pyplot as plt
-
-def filter_and_plot_water_quality(dataframe, characteristic_name):
-    """
-    Filters the dataframe for a specific water quality characteristic
-    and plots the result values over time.
-    """
-    filtered_df = dataframe[dataframe['CharacteristicName'] == characteristic_name].copy()
-    filtered_df['ActivityStartDate'] = pd.to_datetime(filtered_df['ActivityStartDate'], errors='coerce')
-    filtered_df = filtered_df.dropna(subset=['ActivityStartDate', 'ResultMeasureValue'])
-    filtered_df['ResultMeasureValue'] = pd.to_numeric(filtered_df['ResultMeasureValue'], errors='coerce')
-    filtered_df = filtered_df.sort_values(by='ActivityStartDate')
-
-    plt.figure(figsize=(12, 6))
-    plt.plot(filtered_df['ActivityStartDate'], filtered_df['ResultMeasureValue'], marker='o', linestyle='-')
-    plt.title(f"{characteristic_name} Levels Over Time")
-    plt.xlabel("Date")
-    plt.ylabel("Result Measure Value")
-    plt.grid(True)
-    plt.tight_layout()
-    plt.show()
+import pandas as pd
 
 
-def filter_and_plot_multiple_characteristics(dataframe, characteristic_names):
-    """
-    Filters the dataframe for multiple water quality characteristics
-    and plots each characteristic's result values over time.
-    """
-    plt.figure(figsize=(14, 7))
-
-    for characteristic in characteristic_names:
-        filtered_df = dataframe[dataframe['CharacteristicName'] == characteristic].copy()
-        filtered_df['ActivityStartDate'] = pd.to_datetime(filtered_df['ActivityStartDate'], errors='coerce')
-        filtered_df = filtered_df.dropna(subset=['ActivityStartDate', 'ResultMeasureValue'])
-        filtered_df['ResultMeasureValue'] = pd.to_numeric(filtered_df['ResultMeasureValue'], errors='coerce')
-        filtered_df = filtered_df.sort_values(by='ActivityStartDate')
-
-        plt.plot(filtered_df['ActivityStartDate'], filtered_df['ResultMeasureValue'],
-                 marker='o', linestyle='-', label=characteristic)
-
-    plt.title("Water Quality Characteristics Over Time")
-    plt.xlabel("Date")
-    plt.ylabel("Result Measure Value")
-    plt.legend()
-    plt.grid(True)
-    plt.tight_layout()
-    plt.show()
+def _prep(df: pd.DataFrame, characteristic: str) -> pd.DataFrame:
+    """Return a cleaned slice of *df* for one characteristic."""
+    cleaned = (
+        df[df["CharacteristicName"] == characteristic]
+        .assign(
+            ActivityStartDate=lambda d: pd.to_datetime(
+                d["ActivityStartDate"], errors="coerce"
+            ),
+            ResultMeasureValue=lambda d: pd.to_numeric(
+                d["ResultMeasureValue"], errors="coerce"
+            ),
+        )
+        .dropna(subset=["ActivityStartDate", "ResultMeasureValue"])
+        .sort_values("ActivityStartDate")
+    )
+    return cleaned
 
 
-def filter_and_plot_dual_axis(dataframe, characteristic_1, characteristic_2):
-    """
-    Plots two water quality characteristics over time with separate y-axes.
-    """
-    df1 = dataframe[dataframe['CharacteristicName'] == characteristic_1].copy()
-    df1['ActivityStartDate'] = pd.to_datetime(df1['ActivityStartDate'], errors='coerce')
-    df1 = df1.dropna(subset=['ActivityStartDate', 'ResultMeasureValue'])
-    df1['ResultMeasureValue'] = pd.to_numeric(df1['ResultMeasureValue'], errors='coerce')
-    df1 = df1.sort_values(by='ActivityStartDate')
+# ----------------------------------------------------------------------
+# Public API
+# ----------------------------------------------------------------------
+def plot_single(df: pd.DataFrame, characteristic: str, ax: plt.Axes | None = None):
+    """Plot *characteristic* vs. date on *ax* (or create one)."""
+    data = _prep(df, characteristic)
+    ax = ax or plt.gca()
+    ax.plot(
+        data["ActivityStartDate"],
+        data["ResultMeasureValue"],
+        marker="o",
+        linestyle="-",
+        label=characteristic,
+    )
+    ax.set_xlabel("Date")
+    ax.set_ylabel("Result Measure Value")
+    ax.set_title(f"{characteristic} Over Time")
+    ax.grid(True)
+    return ax
 
-    df2 = dataframe[dataframe['CharacteristicName'] == characteristic_2].copy()
-    df2['ActivityStartDate'] = pd.to_datetime(df2['ActivityStartDate'], errors='coerce')
-    df2 = df2.dropna(subset=['ActivityStartDate', 'ResultMeasureValue'])
-    df2['ResultMeasureValue'] = pd.to_numeric(df2['ResultMeasureValue'], errors='coerce')
-    df2 = df2.sort_values(by='ActivityStartDate')
 
+def plot_multi(df: pd.DataFrame, characteristics: Iterable[str]):
+    """Overlay several characteristics on one chart."""
+    fig, ax = plt.subplots(figsize=(14, 7))
+    for ch in characteristics:
+        plot_single(df, ch, ax=ax)
+    ax.legend()
+    fig.tight_layout()
+    return fig, ax
+
+
+def plot_dual_axis(
+    df: pd.DataFrame, char_y1: str, char_y2: str
+) -> Tuple[plt.Figure, plt.Axes]:
+    """Plot *char_y1* and *char_y2* on twin y-axes."""
     fig, ax1 = plt.subplots(figsize=(14, 7))
 
-    ax1.plot(df1['ActivityStartDate'], df1['ResultMeasureValue'], 'b-', label=characteristic_1)
-    ax1.set_xlabel('Date')
-    ax1.set_ylabel(f'{characteristic_1}', color='b')
-    ax1.tick_params(axis='y', labelcolor='b')
+    plot_single(df, char_y1, ax=ax1)
+    ax1.set_ylabel(char_y1, color="tab:blue")
+    ax1.tick_params(axis="y", labelcolor="tab:blue")
 
     ax2 = ax1.twinx()
-    ax2.plot(df2['ActivityStartDate'], df2['ResultMeasureValue'], 'r-', label=characteristic_2)
-    ax2.set_ylabel(f'{characteristic_2}', color='r')
-    ax2.tick_params(axis='y', labelcolor='r')
+    plot_single(df, char_y2, ax=ax2)
+    ax2.set_ylabel(char_y2, color="tab:red")
+    ax2.tick_params(axis="y", labelcolor="tab:red")
 
-    plt.title(f"{characteristic_1} and {characteristic_2} Over Time")
     fig.tight_layout()
-    plt.grid(True)
+    return fig, ax1
+
+
+# ----------------------------------------------------------------------
+# CLI for quick checks  ➜  `python water_quality_plots.py data.csv pH "Dissolved oxygen"`
+# ----------------------------------------------------------------------
+if __name__ == "__main__":
+    import argparse
+
+    p = argparse.ArgumentParser(description="Quick-plot water-quality CSVs.")
+    p.add_argument("csv", type=Path, help="CSV exported from Water Quality Portal")
+    p.add_argument("chars", nargs="+", help="Characteristic names to plot")
+    p.add_argument("--dual", action="store_true", help="Use twin y-axes for first two")
+    args = p.parse_args()
+
+    df_in = pd.read_csv(args.csv)
+    if args.dual and len(args.chars) >= 2:
+        plot_dual_axis(df_in, args.chars[0], args.chars[1])
+    else:
+        plot_multi(df_in, args.chars)
     plt.show()
 
-```
 
 
 
