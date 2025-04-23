@@ -103,6 +103,9 @@ m.save("station_map.html")
 ### Can you please generate with turbidity?
 ![image](https://github.com/user-attachments/assets/b4ccb42a-c5b9-4ffb-9bdd-26cc67d9e24f)
 ### Can you please show me the full python code you used to generate these graphs?
+
+```python
+
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -186,7 +189,8 @@ def filter_and_plot_dual_axis(dataframe, characteristic_1, characteristic_2):
     plt.grid(True)
     plt.show()
 
----
+```
+
 
 
 # Discussion
