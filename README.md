@@ -64,10 +64,8 @@ def get_unique_water_quality_sites(data):
     
     Call the function to display the results 
     unique_sites = get_unique_water_quality_sites(data)
-'''
-
+```
 # Discussion
-
 
 # Conclusion
 
