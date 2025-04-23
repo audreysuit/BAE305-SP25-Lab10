@@ -43,6 +43,8 @@
 
 ### Please generate a Python function that accesses the database, filters for the names of water quality measurement sites, and displays the location information for all sites without repetition.
 
+```python
+# paste here
 import pandas as pd
 
 def get_unique_water_quality_sites(data):
