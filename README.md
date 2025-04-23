@@ -27,8 +27,6 @@
 | **Model**  | GPT-4 (ChatGPT-4, April 2025 version) |
 | **Prompt** | Generate a Python function that accesses the database, filters for the names of water quality measurement sites, and displays the location information for all sites without repetition. |
 
-### Please generate a Python function that accesses the database, filters for the names of water quality measurement sites, and displays the location information for all sites without repetition.
-
 ```python
 # paste here
 import pandas as pd
@@ -57,9 +55,6 @@ def get_unique_water_quality_sites(data):
 |------------|----------------------------------------------------------------------------------|
 | **Model**  | GPT-4 (ChatGPT-4, April 2025 version) |
 | **Prompt** | Create a map that pinpoints the location of every station in the database. |
-
-### Create a map that pinpoints the location of every station in the database.
-### Show python code to generate the map.
 
 ```python
 
@@ -97,11 +92,6 @@ m.save("station_map.html")
 | **Model**  | GPT-4 (ChatGPT-4, April 2025 version) |
 | **Prompt** | Show Python code to generate the above map |
 
-### Generate a python function that accesses Narrowresult, filters for a desired water quality characteristic, and plots the results with pH.
-![image](https://github.com/user-attachments/assets/ed03d7e2-677a-46cb-8fb6-8b6a246e839d)
-### Can you please generate with turbidity?
-![image](https://github.com/user-attachments/assets/b4ccb42a-c5b9-4ffb-9bdd-26cc67d9e24f)
-### Can you please show me the full python code you used to generate these graphs?
 ```python
 
 import pandas as pd
