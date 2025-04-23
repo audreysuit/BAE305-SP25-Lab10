@@ -103,6 +103,107 @@ m.save("station_map.html")
 ### Can you please generate with turbidity?
 ![image](https://github.com/user-attachments/assets/b4ccb42a-c5b9-4ffb-9bdd-26cc67d9e24f)
 ### Can you please show me the full python code you used to generate these graphs?
+import pandas as pd
+import matplotlib.pyplot as plt
+
+
+def filter_and_plot_water_quality(dataframe, characteristic_name):
+    """
+    Filter *dataframe* for a specific water-quality characteristic
+    and plot the result values over time.
+    """
+    filtered_df = dataframe[dataframe["CharacteristicName"] == characteristic_name].copy()
+    filtered_df["ActivityStartDate"] = pd.to_datetime(
+        filtered_df["ActivityStartDate"], errors="coerce"
+    )
+    filtered_df = filtered_df.dropna(subset=["ActivityStartDate", "ResultMeasureValue"])
+    filtered_df["ResultMeasureValue"] = pd.to_numeric(
+        filtered_df["ResultMeasureValue"], errors="coerce"
+    )
+    filtered_df = filtered_df.sort_values(by="ActivityStartDate")
+
+    plt.figure(figsize=(12, 6))
+    plt.plot(
+        filtered_df["ActivityStartDate"],
+        filtered_df["ResultMeasureValue"],
+        marker="o",
+        linestyle="-",
+    )
+    plt.title(f"{characteristic_name} Levels Over Time")
+    plt.xlabel("Date")
+    plt.ylabel("Result Measure Value")
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+def filter_and_plot_multiple_characteristics(dataframe, characteristic_names):
+    """
+    Filter *dataframe* for several characteristics and plot them
+    together on one chart.
+    """
+    plt.figure(figsize=(14, 7))
+
+    for characteristic in characteristic_names:
+        filtered_df = dataframe[dataframe["CharacteristicName"] == characteristic].copy()
+        filtered_df["ActivityStartDate"] = pd.to_datetime(
+            filtered_df["ActivityStartDate"], errors="coerce"
+        )
+        filtered_df = filtered_df.dropna(subset=["ActivityStartDate", "ResultMeasureValue"])
+        filtered_df["ResultMeasureValue"] = pd.to_numeric(
+            filtered_df["ResultMeasureValue"], errors="coerce"
+        )
+        filtered_df = filtered_df.sort_values(by="ActivityStartDate")
+
+        plt.plot(
+            filtered_df["ActivityStartDate"],
+            filtered_df["ResultMeasureValue"],
+            marker="o",
+            linestyle="-",
+            label=characteristic,
+        )
+
+    plt.title("Water-Quality Characteristics Over Time")
+    plt.xlabel("Date")
+    plt.ylabel("Result Measure Value")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
+
+
+def filter_and_plot_dual_axis(dataframe, characteristic_1, characteristic_2):
+    """
+    Plot two characteristics on separate y-axes versus time.
+    """
+    df1 = dataframe[dataframe["CharacteristicName"] == characteristic_1].copy()
+    df1["ActivityStartDate"] = pd.to_datetime(df1["ActivityStartDate"], errors="coerce")
+    df1 = df1.dropna(subset=["ActivityStartDate", "ResultMeasureValue"])
+    df1["ResultMeasureValue"] = pd.to_numeric(df1["ResultMeasureValue"], errors="coerce")
+    df1 = df1.sort_values(by="ActivityStartDate")
+
+    df2 = dataframe[dataframe["CharacteristicName"] == characteristic_2].copy()
+    df2["ActivityStartDate"] = pd.to_datetime(df2["ActivityStartDate"], errors="coerce")
+    df2 = df2.dropna(subset=["ActivityStartDate", "ResultMeasureValue"])
+    df2["ResultMeasureValue"] = pd.to_numeric(df2["ResultMeasureValue"], errors="coerce")
+    df2 = df2.sort_values(by="ActivityStartDate")
+
+    fig, ax1 = plt.subplots(figsize=(14, 7))
+
+    ax1.plot(df1["ActivityStartDate"], df1["ResultMeasureValue"], "b-", label=characteristic_1)
+    ax1.set_xlabel("Date")
+    ax1.set_ylabel(characteristic_1, color="b")
+    ax1.tick_params(axis="y", labelcolor="b")
+
+    ax2 = ax1.twinx()
+    ax2.plot(df2["ActivityStartDate"], df2["ResultMeasureValue"], "r-", label=characteristic_2)
+    ax2.set_ylabel(characteristic_2, color="r")
+    ax2.tick_params(axis="y", labelcolor="r")
+
+    plt.title(f"{characteristic_1} and {characteristic_2} Over Time")
+    fig.tight_layout()
+    plt.grid(True)
+    plt.show()
 
 
 
