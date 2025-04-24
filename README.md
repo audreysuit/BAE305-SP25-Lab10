@@ -1,7 +1,7 @@
 # BAE305-SP25-Lab10
 # Laboratory Report for Lab 10 of BAE305 Spring 2025
-# Lab 10 - Python and AI
-* By: Abby Phillips and Audrey Suit
+# Lab 10 - Python and AI: Surrender Your Data To Our Future AI Helpers
+* By: Audrey Suit
 * Submitted: April 23, 2025
 
 
@@ -9,8 +9,13 @@
 
 
 # Materials
-- Computer running
-- 
+- Computer
+-  Python 3+ Environment
+-  station.csv : Water Station Metadata
+-  narrowresult.csv : Water Quality Measurements
+-  Github Account
+-  Streamlit Account
+-  Libraries: Pandas, Matplotlib, Folium, Streamlit, Streamlit-Folium
 # Assembly Procedures  
 
 ## Assembly Procedures
@@ -104,9 +109,31 @@
 
 
 # Test Equipment
-
+- Computer running python
+- Github Portal
+- Streamlit Portal
+- Local and Cloud IDEs (Anaconda, VS Code, GitHub Codespace)
 
 # Test Procedures
+
+### Part 1: Map It
+
+- We verified that the Python function correctly filtered station types by checking the console output. Every site was confirmed to be unique and relevant (e.g., labeled as “Stream” or “River”).
+- We confirmed that all markers appeared on the map and that each pop-up displayed readable site names and identifiers.
+- We tested marker interactivity by hovering over and clicking each marker.
+- We intentionally removed key columns and reran the code to ensure missing values were excluded and the map remained functional despite incomplete data.
+
+### Part 2: What’s Normal
+- We tested the filter function with multiple parameters, including “pH,” “Turbidity,” and “Nitrate,” to ensure proper data isolation and plot rendering.
+- We validated that data points were ordered chronologically along the x-axis and confirmed that non-numeric entries were dropped before plotting.
+- We evaluated rendering performance using both small and large datasets to verify scalability and responsiveness.
+- We plotted pH and turbidity simultaneously with distinct y-axes, styled with different colors, and confirmed that overlapping points remained distinguishable.
+
+### Part 3: Streamlit App
+- We uploaded several versions of `station.csv` and `narrowresult.csv`—including files with missing headers or altered delimiters—to confirm compatibility and verify that appropriate error messages were displayed when needed.
+Using the sidebar controls, we selected various contaminants, adjusted the result-value slider, and modified the date range, ensuring that the map and plot updated in real-time.
+- We cross-checked displayed map markers against actual data points in `narrowresult.csv` to confirm that only valid entries within the selected filters were shown.
+- We varied both contaminant and date-range selections to test dynamic plot updates and verified that chart titles and axis labels remained accurate and clear under all configurations.
 
 
 # Test Results
