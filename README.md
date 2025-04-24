@@ -7,6 +7,7 @@
 
 # Summary  
 
+This lab provided hands-on experience with data analysis, visualization, and app development using Python and Streamlit. Working with two datasets—water station metadata and water quality measurements—we developed a full pipeline from data cleaning to interactive display. Using tools like Pandas, Matplotlib, and Folium, we first filtered and mapped water quality monitoring sites, then plotted key contaminant trends over time. Finally, we built a Streamlit app that allowed users to upload datasets, filter by contaminant, date, and value range, and view corresponding stations on an interactive map with trend plots. This lab strengthened our understanding of data pipelines, frontend/backend integration, and deploying functional data apps for environmental monitoring.
 
 # Materials
 - Computer
@@ -518,4 +519,6 @@ https://bae305-sp25-lab10-abbyphillips.streamlit.app/
 # Discussion
 
 # Conclusion
+
+This lab introduced data visualization and interactive app development using Python and Streamlit, focusing on environmental monitoring data. We began by filtering and mapping water quality station data with Folium, then created time-series plots of contaminants like pH and turbidity using Matplotlib. Next, we developed a Streamlit web app that allowed users to upload datasets, apply filters for specific contaminants, value ranges, and dates, and view results both as an interactive map and a dynamic trend plot. By completing this lab, we gained practical experience in data cleaning, exploratory plotting, and building user-facing tools that combine real-time filtering with geospatial and temporal visualization.
 
