@@ -7,7 +7,7 @@
 
 # Summary  
 
-This lab provided hands-on experience with data analysis, visualization, and app development using Python and Streamlit. Working with two datasets—water station metadata and water quality measurements—we developed a full pipeline from data cleaning to interactive display. Using tools like Pandas, Matplotlib, and Folium, we first filtered and mapped water quality monitoring sites, then plotted key contaminant trends over time. Finally, we built a Streamlit app that allowed users to upload datasets, filter by contaminant, date, and value range, and view corresponding stations on an interactive map with trend plots. This lab strengthened our understanding of data pipelines, frontend/backend integration, and deploying functional data apps for environmental monitoring.
+This lab provided hands-on experience with data analysis, visualization, and app development using Python and Streamlit. Working with two datasets—water station metadata and water quality measurements—we developed a comprehensive pipeline, spanning from data cleaning to interactive display. Using tools such as Pandas, Matplotlib, and Folium, we first filtered and mapped water quality monitoring sites, and then plotted key contaminant trends over time. Finally, we built a Streamlit app that allowed users to upload datasets, filter by contaminant, date, and value range, and view corresponding stations on an interactive map with trend plots. This lab strengthened our understanding of data pipelines, frontend and backend integration, and deploying functional data applications for environmental monitoring.
 
 # Materials
 - Computer
@@ -44,7 +44,7 @@ This lab provided hands-on experience with data analysis, visualization, and app
 
 #### 4. Mapping with Folium
 - Centered the map on the mean latitude/longitude of valid stations.
-- Added a `folium.Marker` for each site (with popup & tooltip).
+- Added a `folium.Marker` for each site, including a popup and tooltip.
 - Saved the interactive map as `station_map.html`.
 
 ---
@@ -110,7 +110,7 @@ This lab provided hands-on experience with data analysis, visualization, and app
 
 
 # Test Equipment
-- Computer running python
+- Computer running Python
 - Github Portal
 - Streamlit Portal
 - Local and Cloud IDEs (Anaconda, VS Code, GitHub Codespace)
@@ -518,7 +518,7 @@ https://bae305-sp25-lab10-abbyphillips.streamlit.app/
 
 # Discussion
 
-Our process throughout this lab was mostly smooth, we were able to effectively prompt ChatGPT, our conversational AI of choice. The only major hurdle we faced was with our water quality tests. We went through several iterations of code and graph configurations, as we kept generating messy and hard to read graphs. We finally created reasonable graphs by narrowing results down to specific characteristics over time--we chose pH levels and turbidity. 
+Our process throughout this lab was mostly smooth, we were able to effectively prompt ChatGPT, our conversational AI of choice. The only major hurdle we faced was with our water quality tests. We went through several iterations of code and graph configurations, as we kept generating messy and hard-to-read graphs. We finally created reasonable graphs by narrowing down the results to specific characteristics over time--we chose pH levels and turbidity. 
 
 Otherwise, it feels very bizarre having AI do so much work. I reflect on my freshman year when I took EGR 102. It took me hours to write a working code, slowly resolving bugs and making edits to finally reach the desired outcome. Today, that code could be completed by conversational AI in seconds. While the code written in this lab required more than a few attempts, our skills are continually being refined to best prompt the AI to provide the results we seek. 
 
