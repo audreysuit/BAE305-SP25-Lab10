@@ -518,7 +518,11 @@ https://bae305-sp25-lab10-abbyphillips.streamlit.app/
 
 # Discussion
 
+Our process throughout this lab was mostly smooth, we were able to effectively prompt ChatGPT, our conversational AI of choice. The only major hurdle we faced was with our water quality tests. We went through several iterations of code and graph configurations, as we kept generating messy and hard to read graphs. We finally created reasonable graphs by narrowing results down to specific characteristics over time--we chose pH levels and turbidity. 
+
+Otherwise, it feels very bizarre having AI do so much work. I reflect on my freshman year when I took EGR 102. It took me hours to write a working code, slowly resolving bugs and making edits to finally reach the desired outcome. Today, that code could be completed by conversational AI in seconds. While the code written in this lab required more than a few attempts, our skills are continually being refined to best prompt the AI to provide the results we seek. 
+
 # Conclusion
 
-This lab introduced data visualization and interactive app development using Python and Streamlit, focusing on environmental monitoring data. We began by filtering and mapping water quality station data with Folium, then created time-series plots of contaminants like pH and turbidity using Matplotlib. Next, we developed a Streamlit web app that allowed users to upload datasets, apply filters for specific contaminants, value ranges, and dates, and view results both as an interactive map and a dynamic trend plot. By completing this lab, we gained practical experience in data cleaning, exploratory plotting, and building user-facing tools that combine real-time filtering with geospatial and temporal visualization.
+This lab introduced data visualization and interactive app development using Python and Streamlit, with a focus on environmental monitoring data. We began by filtering and mapping water quality station data using Folium, and then created time-series plots of contaminants, such as pH and turbidity, using Matplotlib. Next, we developed a Streamlit web app that enables users to upload datasets, apply filters for specific contaminants, value ranges, and dates, and view results in both interactive map and dynamic trend plot formats. By completing this lab, we gained practical experience in data cleaning, exploratory plotting, and building user-facing tools that combine real-time filtering with geospatial and temporal visualization.
 
