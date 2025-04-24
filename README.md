@@ -302,14 +302,20 @@ def filter_and_plot_dual_axis(dataframe, characteristic_1, characteristic_2):
 | **Model**  | GPT-4 (ChatGPT-4, April 2025 version) |
 | **Prompt** | Generate a Python function that accesses Narrowresult, filters for a desired water quality characteristic, and plots the results with pH. Can you please generate with turbidity? |
 
-[image](https://github.com/user-attachments/assets/150dd0f6-17db-42b0-be2f-1afc5321ae9c)
-[image](https://github.com/user-attachments/assets/e83d219f-5658-4a07-8291-ccbfa99d5a06)
+
+![image](https://github.com/user-attachments/assets/150dd0f6-17db-42b0-be2f-1afc5321ae9c)
+![image](https://github.com/user-attachments/assets/e83d219f-5658-4a07-8291-ccbfa99d5a06)
+
 
 | **Goal** | Generate a Python function that accesses the Narrowresult dataset and plots multiple datasets on the same plot |
 |----------|----------------------------------------------------------------------------------------------------------------|
 | **Model** | GPT-4 (ChatGPT-4, April 2025 version) |
 | **Prompt** | Can you please modify the python code so I can ask for two characteristics at the same time with 2 y axis? |
+
+
 ![image](https://github.com/user-attachments/assets/7fcbb5c8-5d0e-44b1-af68-3c7579efe99d)
+
+
 | **Goal** | Request the full Python code used to generate the turbidity and pH comparison graphs |
 |----------|-------------------------------------------------------------------------------------|
 | **Model** | GPT-4 (ChatGPT-4, April 2025 version) |
